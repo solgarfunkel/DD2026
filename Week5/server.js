@@ -42,6 +42,28 @@ app.get("/imafes/sample.jpg", (req, res) => {
 });
 */
 
+// HTTP METHODS GET POST PUT DELETE
+// GET
+app.get("/api/items", (req,res) => {
+    res.send("this is a get response from /api/items");
+})
+
+// POST
+app.post("/api/items", (req,res) => {
+    res.send("this is a post response from /api/items");
+})
+
+// PUT
+app.put("/api/items/:id", (req,res) => {
+    res.send("this is a put response from /api/items/");
+})
+
+// DELETE
+app.delete("/api/items/:id", (req,res) => {
+    res.send("this is a delete response from /api/items");
+})
+
+
 // start the server
 app.listen(port, () => {
     console.log(`Example app listening at https://localhost:${port}`);
