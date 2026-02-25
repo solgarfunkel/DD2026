@@ -66,5 +66,8 @@ app.delete("/api/items/:id", (req,res) => {
 
 // start the server
 app.listen(port, () => {
-    console.log(`Example app listening at https://localhost:${port}`);
+    console.log(`Example app listening at http://localhost:${port}`);
+}).on("error", (err) => {
+    console.log("Error starting the server", err);
+    process.exit(1);
 });
