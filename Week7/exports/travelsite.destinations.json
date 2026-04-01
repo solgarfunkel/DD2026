@@ -1,0 +1,27 @@
+[{
+  "_id": {
+    "$oid": "69cc6919f940c78c2fe65845"
+  },
+  "page": "buenos-aires-city-guide",
+  "name": "Buenos Aires, Argentina",
+  "description": "Buenos Aires is a lively city known for elegant architecture, late dinners, neighborhood cafés, and a strong arts and music scene. It is a great destination for travelers who want a mix of culture, nightlife, and beautiful city streets to explore.",
+  "image": "/images/bsas.jpg"
+},
+{
+  "_id": {
+    "$oid": "69cc692bf940c78c2fe65847"
+  },
+  "page": "punta-del-este-coastal-guide",
+  "name": "Punta del Este, Uruguay",
+  "description": "Punta del Este is a stylish beach destination with ocean views, modern buildings, relaxing beach clubs, and a fun summer atmosphere. It is perfect for travelers who want a coastal trip that feels both laid-back and a little glamorous.",
+  "image": "/images/pde.jpg"
+},
+{
+  "_id": {
+    "$oid": "69cc6936f940c78c2fe65849"
+  },
+  "page": "rio-de-janeiro-travel-guide",
+  "name": "Rio de Janeiro, Brazil",
+  "description": "Rio de Janeiro is a vibrant city filled with famous beaches, mountain views, music, and energy. It is a great destination for travelers who want iconic scenery, outdoor activities, and a city that feels exciting from morning to night.",
+  "image": "/images/rio.jpg"
+}]

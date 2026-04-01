@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;600;700&display=swap');
+
+body {
+    background-color: #f8f5f1;
+    color: #1f1f1f;
+    font-family: "Funnel Display", sans-serif;
+}
+
+.square {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.widescreen {
+    aspect-ratio: 16 / 6;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+.font-32 {
+    font-size: 32px;
+}
+.font-64 {
+    font-size: 64px;
+}
+
+.funnel-display {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.funnel-display-medium {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.funnel-display-bold {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.navbar {
+    margin-top: 18px;
+    margin-bottom: 28px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    background-color: #fffaf5 !important;
+    border: 1px solid #eadfd3;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+h1, h2, h5 {
+    color: #1f1f1f;
+}
+
+p {
+    color: #5f5a55;
+    line-height: 1.6;
+}
+
+.card {
+    border: 1px solid #eadfd3;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    background-color: #fffdfb;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.btn-primary {
+    background-color: #8b5e3c;
+    border-color: #8b5e3c;
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #6f482b;
+    border-color: #6f482b;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+.container {
+    padding-bottom: 40px;
+}

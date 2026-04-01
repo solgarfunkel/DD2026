@@ -1,0 +1,108 @@
+[{
+  "_id": {
+    "$oid": "69cc6cfaf940c78c2fe65869"
+  },
+  "name": "Relax at Playa Brava",
+  "description": "Spend the afternoon by the ocean at one of Punta del Este’s most well-known beaches.",
+  "image": "/images/pde-brava.jpg",
+  "cost": 0,
+  "destination": {
+    "$oid": "69cc692bf940c78c2fe65847"
+  }
+},
+{
+  "_id": {
+    "$oid": "69cc6d01f940c78c2fe6586b"
+  },
+  "name": "Visit La Mano Sculpture",
+  "description": "Visit the famous hand sculpture rising from the sand, one of the city’s most recognizable landmarks.",
+  "image": "/images/pde-mano.jpg",
+  "cost": 0,
+  "destination": {
+    "$oid": "69cc692bf940c78c2fe65847"
+  }
+},
+{
+  "_id": {
+    "$oid": "69cc6d08f940c78c2fe6586d"
+  },
+  "name": "Visit El Faro",
+  "description": "Head to El Faro for a classic Punta del Este stop with coastal views, sea breeze, and one of the area’s most recognizable landmarks nearby.",
+  "image": "/images/pde-faro.jpg",
+  "cost": 5,
+  "destination": {
+    "$oid": "69cc692bf940c78c2fe65847"
+  }
+},
+{
+  "_id": {
+    "$oid": "69cc6d14f940c78c2fe6586f"
+  },
+  "name": "Ride Up to Sugarloaf Mountain",
+  "description": "Take in sweeping views of Rio’s beaches, mountains, and skyline from one of the city’s most famous viewpoints.",
+  "image": "/images/brazil-mountain.jpg",
+  "cost": 42,
+  "destination": {
+    "$oid": "69cc6936f940c78c2fe65849"
+  }
+},
+{
+  "_id": {
+    "$oid": "69cc6d1bf940c78c2fe65871"
+  },
+  "name": "Spend the Day at Ipanema Beach",
+  "description": "Relax on one of Rio’s most iconic beaches and enjoy the energy of the city right by the water.",
+  "image": "/images/brazil-impanema.jpg",
+  "cost": 0,
+  "destination": {
+    "$oid": "69cc6936f940c78c2fe65849"
+  }
+},
+{
+  "_id": {
+    "$oid": "69cc6d24f940c78c2fe65873"
+  },
+  "name": "Visit Christ the Redeemer",
+  "description": "Head up the mountain to see one of the most famous landmarks in the world and take in the panoramic city views.",
+  "image": "/images/brazil-christ.jpg",
+  "cost": 25,
+  "destination": {
+    "$oid": "69cc6936f940c78c2fe65849"
+  }
+},
+{
+  "_id": {
+    "$oid": "69cc7610f940c78c2fe6587a"
+  },
+  "name": "Visit El Planetario",
+  "description": "Stop by El Planetario, one of Buenos Aires’s most recognizable landmarks, set beside the parks and walking paths of Palermo. Its futuristic design and surrounding green space make it a fun break from the busier parts of the city.",
+  "image": "/images/bsas-planetario.jpg",
+  "cost": 6,
+  "destination": {
+    "$oid": "69cc6919f940c78c2fe65845"
+  }
+},
+{
+  "_id": {
+    "$oid": "69cc7661f940c78c2fe65883"
+  },
+  "name": "Tour Teatro Colón",
+  "description": "Step inside one of the most beautiful opera houses in the world and admire the grand interiors, rich history, and elegant design that make it so iconic.",
+  "image": "/images/bsas-teatro.jpg",
+  "cost": 18,
+  "destination": {
+    "$oid": "69cc6919f940c78c2fe65845"
+  }
+},
+{
+  "_id": {
+    "$oid": "69cc7675f940c78c2fe65885"
+  },
+  "name": "Dinner in Palermo",
+  "description": "Head to Palermo for a long dinner surrounded by stylish restaurants, candlelit patios, and the neighborhood’s laid-back nightlife energy.",
+  "image": "/images/bsas-restaurant.jpg",
+  "cost": 30,
+  "destination": {
+    "$oid": "69cc6919f940c78c2fe65845"
+  }
+}]

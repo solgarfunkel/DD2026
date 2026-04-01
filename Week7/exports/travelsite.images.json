@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "69cc6bcff940c78c2fe65858"
+  },
+  "url": "/images/bsas.jpg",
+  "caption": "Classic streets and city energy in Buenos Aires",
+  "gallery": "69cc6850f940c78c2fe6583c"
+},
+{
+  "_id": {
+    "$oid": "69cc6c16f940c78c2fe6585a"
+  },
+  "url": "/images/pde.jpg",
+  "caption": "Sunny coastline in Punta del Este",
+  "gallery": "69cc6850f940c78c2fe6583c"
+},
+{
+  "_id": {
+    "$oid": "69cc6c58f940c78c2fe6585c"
+  },
+  "url": "/images/rio.jpg",
+  "caption": "Views and color in Rio de Janeiro",
+  "gallery": "69cc6850f940c78c2fe6583c"
+}]

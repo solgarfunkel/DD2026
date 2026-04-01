@@ -1,0 +1,22 @@
+<div class="mb-4">
+  <h1>{{destination.name}}</h1>
+  <img class="img-fluid widescreen" src="{{destination.image}}" alt="{{destination.name}} image">
+  <p>{{destination.description}}</p>
+</div>
+
+<h2 class="font-32 funnel-display-medium mb-4">Things to Do</h2>
+
+<div class="row">
+  {{#each activities}}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="{{image}}" class="card-img-top square" alt="{{name}} image">
+        <div class="card-body">
+          <h5 class="card-title">{{name}}</h5>
+          <p class="card-text">{{description}}</p>
+          <p class="mb-0"><strong>Cost:</strong> ${{cost}}</p>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>
