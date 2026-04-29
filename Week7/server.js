@@ -1,18 +1,40 @@
+// 1. setup node app with command: npm init
+// 2. install express with command: npm install express
+// 3. create a file named server.js and add the following code
+// 4. start the db with command: brew services start mongodb-community //mac on windows start the mongodb server with command: & "C:\Program Files\MongoDB\Server\8.2\bin\mongod.exe" --dbpath="C:\data\db"
 const express = require("express");
 const app = express();
-const port = 3000;
+// change port to 3001 to avoid conflict with React development server which runs on port 3000 by default
+const port = 3001;
 
 const hbs = require("express-handlebars");
 
 app.engine("handlebars", hbs.engine());
 app.set("view engine", "handlebars");
 
+// path module: used to work with file and directory paths
 const path = require("path");
-const mongoose = require("mongoose");
+// setup uploads directory for storing uploaded images
+const multer = require("multer");
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./static/images/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage });
+
+//setup db connection
+const mongoose = require("mongoose");
+const { title } = require("process");
+
+// create schemas
 const pageSchema = new mongoose.Schema({
-  slug: String,
-  name: String,
+  slug: String, 
+  name: String, 
   description: String,
 });
 
@@ -41,7 +63,7 @@ const destinationSchema = new mongoose.Schema(
     virtuals: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  },
 );
 
 destinationSchema.virtual("activities", {
@@ -50,12 +72,14 @@ destinationSchema.virtual("activities", {
   foreignField: "destination",
 });
 
+// Add virtual field for the gallery to the image schema
 gallerySchema.virtual("images", {
   ref: "images",
   localField: "_id",
   foreignField: "gallery",
 });
 
+// Activities schema for things to do in each destination
 const activitySchema = new mongoose.Schema({
   name: String,
   description: String,
@@ -68,9 +92,13 @@ const activitySchema = new mongoose.Schema({
 });
 
 const Destination = mongoose.model("destinations", destinationSchema);
+
 const Activity = mongoose.model("activities", activitySchema);
+
 const Page = mongoose.model("pages", pageSchema);
+
 const Gallery = mongoose.model("galleries", gallerySchema);
+
 const Image = mongoose.model("images", imageSchema);
 
 async function main() {
@@ -78,56 +106,69 @@ async function main() {
 }
 main().catch((err) => console.log(err));
 
+// Serving static files
 app.use(express.static(path.join(__dirname, "static")));
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); 
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+  );
+  next();
+});
 
+// generate routes
 app.get("/", async (req, res) => {
+  // Homepage route
   const homePage = await Page.findOne({ slug: "home" }).lean();
-
-  const gallery = await Gallery.findOne({ name: "Homepage Gallery" })
+  // Bring in the gallery
+  const gallery = await Gallery.findOne({ name: "home" })
     .populate("images")
     .lean();
 
   const destinations = await Destination.find().lean();
-
   res.render("home", {
-    title: homePage.name,
-    description: homePage.description,
-    galleryImages: gallery.images,
+    title: homePage ? homePage.name : "Travel Site",
+    description: homePage ? homePage.description : "Welcome to our travel site!",
+    galleryImages: gallery ? gallery.images : [],
     destinations: destinations,
   });
 });
 
-app.post("/destinations", async (req, res) => {
-  const { page, name, description, image } = req.body;
+// generate routes to populate destinations page
+app.post("/api/destinations", upload.single("image"), async (req, res) => {
+  // add a new destination to the database
+  const { page, name, description } = req.body;
+  const image = req.file; // Get the path of the image
   console.log(req.body);
-
   const newDestination = new Destination({
     page,
     name,
     description,
-    image,
+    image: image ? `/images/${image.filename}` : "/images/default.jpg", // Store the path to the image in database
   });
-
   await newDestination.save();
   res.send("Destination added successfully");
 });
-
+// generate routes to display destinations page
 app.get("/destinations", async (req, res) => {
+  // code to fetch destinations from the database and render the destinations page
   const destinations = await Destination.find().lean();
-
   res.render("destinations", {
     destinations: destinations,
     title: "Destinations",
   });
 });
 
+// Get a specific destination by _id
 app.get("/destinations/:id", async (req, res) => {
   const { id } = req.params;
   const destination = await Destination.findById(id)
     .populate("activities")
     .lean();
-
+  //const activities = await Activity.find({ destination: id }).lean();
   res.render("details", {
     destination: destination,
     title: destination.name,
@@ -135,9 +176,34 @@ app.get("/destinations/:id", async (req, res) => {
   });
 });
 
+// update destination
+app.put("/api/destinations/:id", upload.single("image"), async (req, res) => {
+  const { id } = req.params;
+  const { page, name, description } = req.body;
+  const image = req.file;
+
+  const currentDestination = await Destination.findById(id);
+
+  if(!currentDestination) {
+    return res.status(404).send("Destination not found");
+  }
+
+  currentDestination.page = page;
+  currentDestination.name = name;
+  currentDestination.description = description;
+
+  // If a new image is uploaded, update the image path
+  if (image) {
+    currentDestination.image = `/images/${image.filename}`;
+  }
+
+  await currentDestination.save();
+  res.send("Destination updated successfully");
+});
+
+// activities routes
 app.post("/activities", async (req, res) => {
   const { name, description, image, cost, destination } = req.body;
-
   const newActivity = new Activity({
     name,
     description,
@@ -145,49 +211,67 @@ app.post("/activities", async (req, res) => {
     cost,
     destination,
   });
-
   await newActivity.save();
   res.send("Activity added successfully");
 });
 
+// Create a new page
 app.post("/pages", async (req, res) => {
   const { slug, name, description } = req.body;
-
   const newPage = new Page({
     slug,
     name,
     description,
   });
-
   await newPage.save();
   res.send("Page added successfully");
 });
 
+// Create a new gallery
 app.post("/galleries", async (req, res) => {
   const { name, description } = req.body;
-
   const newGallery = new Gallery({
     name,
     description,
   });
-
   await newGallery.save();
   res.send("Gallery added successfully");
 });
 
+// Create a new image
 app.post("/images", async (req, res) => {
   const { url, caption, gallery } = req.body;
-
   const newImage = new Image({
     url,
     caption,
     gallery,
   });
-
   await newImage.save();
   res.send("Image added successfully");
 });
 
+// setup basic api routes
+app.get("/api/destinations", async (req, res) => {
+  const destinations = await Destination.find().lean();
+  res.json(destinations);
+});
+
+// Get a specific destination by _id
+app.get("/api/destinations/:id", async (req, res) => {
+  const { id } = req.params;
+  const destination = await Destination.findById(id)
+    .populate("activities")
+    .lean();
+  res.json(destination);
+});
+
+app.delete("/api/destinations/:id", async (req, res) => {
+  const { id } = req.params;
+  await Destination.findByIdAndDelete(id);
+  res.send("Destination deleted successfully");
+});
+
+// start the server
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
